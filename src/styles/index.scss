@@ -1,0 +1,96 @@
+.board {
+  display: flex;
+  flex-flow: row nowrap;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: stretch;
+  align-items: stretch;
+  user-select: none;
+  padding: 0px;
+  width: fit-content;
+
+  &--list {
+    display: flex;
+    flex-direction: column;
+    align-self: auto;
+    flex: 1 1 auto;
+    margin: 5px 5px 0px 0px;
+    background-color: rgb(244, 245, 247);
+    border-radius: 6px;
+    position: relative;
+    align-self: stretch;
+    padding: 8px;
+    transition: opacity 0.2s ease 0s;
+    min-width: 270px;
+    max-width: 270px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    &--header {
+      display: flex;
+      flex-flow: row;
+      justify-content: space-between;
+
+      &:hover > .action button {
+        display: block;
+      }
+      .action {
+        button {
+          display: none;
+        }
+      }
+    }
+    &--card {
+      border-radius: 3px;
+      background-color: rgba(#c0b6f2, 0.4);
+      height: auto !important;
+      margin: 10px 0px;
+      padding: 8px;
+      background: rgba(65, 217, 26, 0.25);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      &:hover {
+        background-color: rgba(#c0b6f2, 1);
+      }
+
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      .header {
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+        &-title {
+          font-size: 12px;
+        }
+        &:hover > .action button {
+          display: block;
+        }
+        .action {
+          button {
+            display: none;
+          }
+        }
+      }
+      .main {
+        &-label {
+          display: flex;
+          flex-flow: row;
+          flex-wrap: wrap;
+          & > * {
+            margin: 2px;
+          }
+        }
+      }
+    }
+  }
+}
+.layout {
+  padding: 25px 30px;
+}
+.board--list--dialog {
+  // .ant-modal-content ,.ant-modal-header{
+  //   background: rgba(65, 217, 26, 0.25);
+  //   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  //   backdrop-filter: blur(4px);
+  // }
+}

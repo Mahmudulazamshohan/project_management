@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useRef, useState } from "react";
+import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getPosts } from "./api/posts";
+import "./App.css";
+import { removePostAction } from "./redux/actions/postActions";
+import { AppState } from "./redux/store";
+import HomePage from "./pages/HomePage";
+import AppLayouts from "./layouts/AppLayouts";
+import DragPage from "./pages/DragPage";
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <AppLayouts>
+          <Switch>
+            <Route exact={true} path="/">
+              <HomePage />
+            </Route>
+            <Route exact={true} path="/drag-page">
+              <DragPage />
+            </Route>
+            <Route path="*">Not Found</Route>
+          </Switch>
+        </AppLayouts>
+      </BrowserRouter>
     </div>
   );
 }
