@@ -16,11 +16,12 @@ const { SubMenu } = Menu;
 
 const AppLayouts: React.FC = ({ children }) => {
   const [current, setCurrent] = useState<string>("jira");
-
   const history = useHistory();
+  
   const [breadcrumbPath, setBreadCrumbPath] = useState<string>(
     history.location.pathname.replaceAll("/", " ").toUpperCase()
   );
+
   useEffect(() => {
     history.listen((location) => {
       document.title = location.pathname.replaceAll("/", " ").toUpperCase();
@@ -29,7 +30,7 @@ const AppLayouts: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <div>
+    <div className="app--root">
       <Menu
         onClick={(e: any) => {
           setCurrent(e.key);
@@ -51,16 +52,25 @@ const AppLayouts: React.FC = ({ children }) => {
             <Menu.Item key="setting:4">Option 4</Menu.Item>
           </Menu.ItemGroup>
         </SubMenu>
+        <SubMenu key="COLLABORATORS" title={"YOUR COLLABORATORS"}>
+          <Menu.ItemGroup title="Item 1">
+            <Menu.Item key="setting:1">Option 1</Menu.Item>
+            <Menu.Item key="setting:2">Option 2</Menu.Item>
+          </Menu.ItemGroup>
+          <Menu.ItemGroup title="Item 2">
+            <Menu.Item key="setting:3">Option 3</Menu.Item>
+            <Menu.Item key="setting:4">Option 4</Menu.Item>
+          </Menu.ItemGroup>
+        </SubMenu>
         <Menu.Item key="alipay">
           <Link to="/drag-page">
-            Board
-            <FontAwesomeIcon icon={faChevronCircleDown} />
+            Board <FontAwesomeIcon icon={faChevronCircleDown} />
           </Link>
         </Menu.Item>
       </Menu>
       <Row>
         <Col span={3}>
-          <div style={{ height: "calc(100vh - 0px) !important" }}>
+          <div className="app--sidebar">
             <Menu
               style={{ width: "100%" }}
               defaultSelectedKeys={["1"]}
@@ -85,6 +95,7 @@ const AppLayouts: React.FC = ({ children }) => {
                 <Menu.Item key="11">Option 11</Menu.Item>
                 <Menu.Item key="12">Option 12</Menu.Item>
               </SubMenu>
+              
             </Menu>
           </div>
         </Col>

@@ -71,6 +71,12 @@ const DragPage = () => {
 
   const [boardList, setBoardList] = useState(getBoardCards(5, 18));
   const [cloneBoardList, setCloneBoardList] = useState<IBoardList[]>([]);
+  const [menuStyles, setMenuStyles] = useState<Object>({
+    display: "none",
+    position: "fixed",
+    top: 0,
+    left: 0,
+  });
   // a little function to help us with reordering the result
   const reorder = (list: ICards[], startIndex: number, endIndex: number) => {
     const result: Array<any> = Array.from(list);
@@ -173,7 +179,7 @@ const DragPage = () => {
     };
   };
 
-  const handleIssueSearch = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleIssueSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const queryValue = e.target.value;
 
     const result = boardList.map((board) => {
@@ -200,11 +206,37 @@ const DragPage = () => {
     setIsVisible(false);
   };
 
+  const [prevTarget, setPrevTarget] = useState<any>();
+  const handleRightClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setPrevTarget(e.target);
+
+    setMenuStyles({
+      display: "block",
+      position: "fixed",
+      top: e.screenY - 90,
+      left: e.screenX,
+     
+    });
+  };
   useEffect(() => {
+    window.addEventListener("click", (e) => {
+      if(e.target !== prevTarget){
+        setMenuStyles({
+          display: "none",
+          position: "fixed",
+          top: 0,
+          left:0,
+          background: "red",
+        });
+      }
+      console.log(e)
+    });
     setTimeout(() => {
       setIsLoaded(true);
     }, 1000);
-  }, []);
+  },[]);
+
   useEffect(() => {
     setCloneBoardList(boardList);
   }, [boardList]);
@@ -212,7 +244,7 @@ const DragPage = () => {
   return (
     <>
       <div className="info--section">
-        <h2>Sprint 1</h2>
+        <h2 className="sprint--name">Sprint 1</h2>
         <div
           style={{
             display: "flex",
@@ -225,6 +257,7 @@ const DragPage = () => {
               display: "flex",
               flexFlow: "row",
             }}
+            className="s"
           >
             <Input.Search
               size="middle"
@@ -276,7 +309,11 @@ const DragPage = () => {
               return (
                 <Droppable key={k1} droppableId={board.id}>
                   {(provided, snapshot) => (
-                    <div ref={provided.innerRef} className="board--list">
+                    <div
+                      ref={provided.innerRef}
+                      className="board--list"
+                      onContextMenu={handleRightClick}
+                    >
                       <div className="board--list--header">
                         <p
                           style={{
@@ -318,11 +355,12 @@ const DragPage = () => {
                                     provided.draggableProps.style,
                                     snapshot
                                   )}
-                                  onClick={handleShowBoardListDialog}
+                                
                                 >
-                                  <div className="header">
-                                    <p className="header-title">
+                                  <div className="header"   >
+                                    <p className="header-title" onClick={handleShowBoardListDialog}>
                                       {cardList.content}
+                                     
                                     </p>
                                     <div className="action">
                                       <Dropdown.Button
@@ -366,7 +404,7 @@ const DragPage = () => {
                                   </div>
                                   <div className="main">
                                     <div className="main-label">
-                                      {[1, 2, 3].map((n) => (
+                                      {[1,2].map((n) => (
                                         <Button
                                           key={n}
                                           type={n % 2 ? "primary" : "default"}
@@ -394,6 +432,18 @@ const DragPage = () => {
             onOk={handleOkBoardListDialog}
             onCancel={handleCancelBoardListDialog}
           />
+
+          <div style={menuStyles}
+            className="menu--context"
+          >
+            <ul className="list">
+              <li className="list--item">Add label</li>
+              <li className="list--item">Remove flags</li>
+              <li className="list--item">Copy issue link</li>
+              <li className="list--item">Delete</li>
+            </ul>
+
+          </div>
         </div>
       ) : (
         <BoardSkeletonLoader />
