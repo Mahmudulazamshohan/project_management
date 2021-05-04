@@ -1,3 +1,8 @@
+
+import { shallow } from "enzyme";
+
 describe("Rich text editor props", () => {
-  it("", () => {});
+  it("", () => {
+    expect("a").toBe("a");
+  });
 });

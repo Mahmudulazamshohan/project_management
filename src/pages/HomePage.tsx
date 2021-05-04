@@ -4,12 +4,10 @@ export interface IHomePage {}
 
 const HomePage: React.FC<IHomePage> = () => {
   const history = useHistory();
-  // useEffect(() => {
-  //   console.log(history);
-  //   setTimeout(() => {
-  //     history.push("/abcd");
-  //   }, 3000);
-  // }, []);
-  return <div>Home Page</div>;
+  return (
+    <div>
+      <h2>Projects</h2>
+    </div>
+  );
 };
 export default withRouter(HomePage);
