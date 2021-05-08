@@ -1,9 +1,7 @@
 import React from "react";
-import { useHistory, withRouter } from "react-router-dom";
-export interface IHomePage {}
+import { withRouter } from "react-router-dom";
 
-const HomePage: React.FC<IHomePage> = () => {
-  const history = useHistory();
+const HomePage: React.FC = () => {
   return (
     <div>
       <h2>Projects</h2>

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   DragDropContext,
   Droppable,
@@ -8,7 +8,7 @@ import {
 
 import BoardSkeletonLoader from "../components/board/board.skeleton.loader";
 import { AntDesignOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Dropdown, Input, Menu, Modal, Tooltip } from "antd";
+import { Avatar, Button, Dropdown, Input, Menu, Tooltip } from "antd";
 import BoardListDialog from "../components/board/board.list.dialog";
 
 interface ICards {
@@ -166,7 +166,6 @@ const DragPage = () => {
       );
     }
   };
-
   const getStyle = (style: any, snapshot: any) => {
     if (!snapshot.isDropAnimating) {
       return style;

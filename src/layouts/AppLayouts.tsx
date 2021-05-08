@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Breadcrumb, Col, Menu, Row } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faArrowDown,
-  faCaretDown,
+
   faChevronCircleDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory, withRouter } from "react-router-dom";
 import {
   AppstoreOutlined,
-  MailOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
 const { SubMenu } = Menu;
