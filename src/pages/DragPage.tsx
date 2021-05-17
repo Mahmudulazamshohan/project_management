@@ -166,6 +166,7 @@ const DragPage = () => {
       );
     }
   };
+
   const getStyle = (style: any, snapshot: any) => {
     if (!snapshot.isDropAnimating) {
       return style;
@@ -218,6 +219,8 @@ const DragPage = () => {
      
     });
   };
+
+  
   useEffect(() => {
     window.addEventListener("click", (e) => {
       if(e.target !== prevTarget){
