@@ -1,36 +1,40 @@
 import React from "react";
-interface IProject {}
 import { Table } from "antd";
 import { ColumnsType } from "antd/lib/table";
+import { EnumType } from "typescript";
 
-type TFilters = {
+export interface IProjectProps {}
+
+export type TFilters = {
   text: string;
   value: string;
   children?: TFilters[];
 };
 
-type IData = {
+export type IData = {
   key?: string;
   name?: string;
   age: number;
-  address: string;
+  type: "Company-managed software" | "Team-managed software";
 };
 
-interface IColumn {
+export interface IColumn {
   title: string;
   dataIndex: string;
   filters?: TFilters[];
   defaultSortOrder?: string;
-  onFilter?: (value: IData, record: IData) => boolean;
-  sorter?: (a: IData, b: IData) => number;
   sortDirections?: string[];
   filterMultiple?: boolean;
+  // Functions
+  onFilter?: (value: any, record: any) => any;
+  sorter?: (a: any, b: any) => any;
 }
 
 const columns: ColumnsType<IColumn> = [
   {
     title: "Name",
     dataIndex: "name",
+
     filters: [
       {
         text: "Joe",
@@ -43,6 +47,7 @@ const columns: ColumnsType<IColumn> = [
       {
         text: "Submenu",
         value: "Submenu",
+
         children: [
           {
             text: "Green",
@@ -57,70 +62,44 @@ const columns: ColumnsType<IColumn> = [
     ],
     // specify the condition of filtering result
     // here is that finding the name started with `value`
-    // onFilter: (value: string, record: { name: string }) =>
-    //   record.name.indexOf(value) === 0,
-    sorter: (a: { name: string }, b: { name: string }) => {
-      return  a.name.length - b.name.length;
+    onFilter: (value: any, record: any) => record.name.indexOf(value) === 0,
+    sorter: (a: any, b: any) => {
+      return a.name.length - b.name.length;
     },
     sortDirections: ["descend"],
   },
   {
-    title: "Age",
-    dataIndex: "age",
+    title: "Key",
+    dataIndex: "key",
     defaultSortOrder: "descend",
-    sorter: (a: { age: number }, b: { age: number }) => a.age - b.age,
+    // sorter: (a: { age: number }, b: { age: number }) => a.age - b.age,
   },
   {
-    title: "Address",
-    dataIndex: "address",
+    title: "Type",
+    dataIndex: "type",
     filters: [
-      {
-        text: "London",
-        value: "London",
-      },
-      {
-        text: "New York",
-        value: "New York",
-      },
+      
     ],
     filterMultiple: false,
-    onFilter: (value: string, record: IData) =>
-      record?.address.indexOf(value) === 0,
-    sorter: (a: IData, b: IData) => a.address.length - b.address.length,
+    onFilter: (value: any, record: any) => record?.address.indexOf(value) === 0,
+    sorter: (a: any, b: any) => a.address.length - b.address.length,
     sortDirections: ["descend", "ascend"],
   },
 ];
 
-const data: IData[] | any = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
-  },
-  {
-    key: "4",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-  },
-];
+const data: any = Array.from(Array(20)).map((value: number, key: number) => {
+  return {
+    key,
+    name: "Project " + key,
+    age: Math.floor(Math.random() * key),
+    type: key % 2 ? "Team-managed software":"Company-managed software",
+  } ;
+});
 
 function onChange(pagination: any, filters: any, sorter: any, extra: any) {
   console.log("params", pagination, filters, sorter, extra);
 }
-export const ProjectList: React.FC<IProject> = () => {
+
+export const ProjectList: React.FC<IProjectProps> = () => {
   return <Table columns={columns} dataSource={data} onChange={onChange} />;
 };
