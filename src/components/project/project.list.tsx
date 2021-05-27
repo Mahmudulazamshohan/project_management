@@ -81,13 +81,16 @@ const columns: ColumnsType<IColumn> = [
       
     ],
     filterMultiple: false,
-    onFilter: (value: any, record: any) => record?.address.indexOf(value) === 0,
-    sorter: (a: any, b: any) => a.address.length - b.address.length,
-    sortDirections: ["descend", "ascend"],
+    onFilter: (value: any, record: any) => record?.type.indexOf(value) === 0,
+    sorter: (a: any, b: any) => a.type.length - b.type.length,
+    sortDirections: [
+      "descend",
+      "ascend"
+    ],
   },
 ];
 
-const data: any = Array.from(Array(20)).map((value: number, key: number) => {
+const data: any = Array.from(Array(50)).map((value: number, key: number) => {
   return {
     key,
     name: "Project " + key,

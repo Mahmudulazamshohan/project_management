@@ -4,11 +4,16 @@ import { BoardListCard } from "../board.list.card";
 import { shallow } from "enzyme";
 
 describe("BoardListCard props testcase", () => {
-
-  it("all props checked", () => {
-    var wrapper = shallow(<BoardListCard />);
-    var divElement = wrapper.find('div')
-    expect(divElement.text()).toEqual('')
+  beforeEach(() => {
+    console.log('--->')
   });
-  
+  it("all props checked", () => {
+    var wrapper = shallow(<BoardListCard>shohan</BoardListCard>);
+    var divElement = wrapper.find(".button");
+    divElement.simulate("click");
+
+    var counterElement = wrapper.find(".counter");
+    expect(counterElement.text()).toEqual("2");
+  });
+
 });

@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Breadcrumb, Col, Menu, Row } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-
-  faChevronCircleDown,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronCircleDown } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory, withRouter } from "react-router-dom";
-import {
-  AppstoreOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
 const { SubMenu } = Menu;
 
 const AppLayouts: React.FC = ({ children }) => {
   const [current, setCurrent] = useState<string>("jira");
   const history = useHistory();
-  
+
   const [breadcrumbPath, setBreadCrumbPath] = useState<string>(
     history.location.pathname.replaceAll("/", " ").toUpperCase()
   );
@@ -66,6 +60,7 @@ const AppLayouts: React.FC = ({ children }) => {
           </Link>
         </Menu.Item>
       </Menu>
+
       <Row>
         <Col span={3}>
           <div className="app--sidebar">
@@ -93,7 +88,6 @@ const AppLayouts: React.FC = ({ children }) => {
                 <Menu.Item key="11">Option 11</Menu.Item>
                 <Menu.Item key="12">Option 12</Menu.Item>
               </SubMenu>
-              
             </Menu>
           </div>
         </Col>
