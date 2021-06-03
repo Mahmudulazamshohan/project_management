@@ -1,7 +1,11 @@
 import React from "react";
-import { Table } from "antd";
+import { Col, Row, Table } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import { EnumType } from "typescript";
+import { Link } from "react-router-dom";
+import { encodeGetQuery } from "../../utils/helpers";
+import Avatar from "antd/lib/avatar/avatar";
+import { UserOutlined } from "@ant-design/icons";
 
 export interface IProjectProps {}
 
@@ -35,31 +39,6 @@ const columns: ColumnsType<IColumn> = [
     title: "Name",
     dataIndex: "name",
 
-    filters: [
-      {
-        text: "Joe",
-        value: "Joe",
-      },
-      {
-        text: "Jim",
-        value: "Jim",
-      },
-      {
-        text: "Submenu",
-        value: "Submenu",
-
-        children: [
-          {
-            text: "Green",
-            value: "Green",
-          },
-          {
-            text: "Black",
-            value: "Black",
-          },
-        ],
-      },
-    ],
     // specify the condition of filtering result
     // here is that finding the name started with `value`
     onFilter: (value: any, record: any) => record.name.indexOf(value) === 0,
@@ -67,6 +46,13 @@ const columns: ColumnsType<IColumn> = [
       return a.name.length - b.name.length;
     },
     sortDirections: ["descend"],
+    render: (value: string) => {
+      const query = encodeGetQuery({
+        projectKey: value,
+      });
+      const uri = "/drag-page/" + value + query;
+      return <Link to={uri}>{value}</Link>;
+    },
   },
   {
     title: "Key",
@@ -77,26 +63,35 @@ const columns: ColumnsType<IColumn> = [
   {
     title: "Type",
     dataIndex: "type",
-    filters: [
-      
-    ],
-    filterMultiple: false,
+
     onFilter: (value: any, record: any) => record?.type.indexOf(value) === 0,
     sorter: (a: any, b: any) => a.type.length - b.type.length,
-    sortDirections: [
-      "descend",
-      "ascend"
-    ],
+  },
+  {
+    title: "Lead",
+    dataIndex: "lead",
+    render: (value: string) => {
+      return <Row>
+         <Col span={4}>
+         <Link to={"/" + value}><Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>S</Avatar></Link>
+         </Col>
+         <Col span={6}>
+         <Link to={"/" + value}>{value}</Link>
+         </Col>
+      </Row>
+     
+    },
   },
 ];
 
 const data: any = Array.from(Array(50)).map((value: number, key: number) => {
   return {
     key,
-    name: "Project " + key,
+    name: "Project" + key,
     age: Math.floor(Math.random() * key),
-    type: key % 2 ? "Team-managed software":"Company-managed software",
-  } ;
+    type: key % 2 ? "Team-managed software" : "Company-managed software",
+    lead: "Shohan",
+  };
 });
 
 function onChange(pagination: any, filters: any, sorter: any, extra: any) {
