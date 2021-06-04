@@ -71,15 +71,20 @@ const columns: ColumnsType<IColumn> = [
     title: "Lead",
     dataIndex: "lead",
     render: (value: string) => {
-      return <Row>
-         <Col span={4}>
-         <Link to={"/" + value}><Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>S</Avatar></Link>
-         </Col>
-         <Col span={6}>
-         <Link to={"/" + value}>{value}</Link>
-         </Col>
-      </Row>
-     
+      return (
+        <Row>
+          <Col span={4}>
+            <Link to={"/" + value}>
+              <Avatar style={{ color: "#f56a00", backgroundColor: "#fde3cf" }}>
+                S
+              </Avatar>
+            </Link>
+          </Col>
+          <Col span={6}>
+            <Link to={"/" + value}>{value}</Link>
+          </Col>
+        </Row>
+      );
     },
   },
 ];
