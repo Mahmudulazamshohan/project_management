@@ -207,10 +207,12 @@ const DragPage = () => {
   };
 
   const [prevTarget, setPrevTarget] = useState<any>();
+
   const handleRightClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    setPrevTarget(e.target);
 
+    setPrevTarget(e.target);
+    
     setMenuStyles({
       display: "block",
       position: "fixed",
