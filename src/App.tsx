@@ -32,13 +32,16 @@ const Topics: React.FC = () => {
       <p>Topics</p>
       <ul>
         <li>
-          <Link to={`${match.url}/components`}>Components</Link>
+          <Link to={`${match.url}/components`}>
+            Components
+          </Link>
         </li>
         <li>
-          <Link to={`${match.url}/props-v-state`}>Props v. State</Link>
+          <Link to={`${match.url}/props-v-state`}>
+            Props v. State
+          </Link>
         </li>
       </ul>
-
       <Switch>
         <Route path={`${match.url}/:topicId`} exact={true}>
           <Abcd />
@@ -55,7 +58,11 @@ interface IRouterRecursiveProps {
   routes: Array<IRoutes>;
   key?: number;
 }
-const AppLayoutRoute: React.FC<IRoutes> = ({ layout, path, component }) => {
+const AppLayoutRoute: React.FC<IRoutes> = ({
+  layout,
+  path,
+  component,
+}) => {
   return <Route path={path} exact={true}></Route>;
 };
 
