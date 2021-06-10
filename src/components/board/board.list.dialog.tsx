@@ -1,7 +1,23 @@
-import { faBug, faLink, faPaperclip } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBug,
+  faLink,
+  faPaperclip,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCallback, useMemo, useRef, useState } from "react";
-import { Col, Modal, Row, Button } from "antd";
+import {
+  Col,
+  Modal,
+  Row,
+  Button,
+  Divider,
+  Dropdown,
+  Menu,
+} from "antd";
+import ReactQuill from "react-quill";
+import Avatar from "antd/lib/avatar/avatar";
+import { UserOutlined } from "@ant-design/icons";
+import TextArea from "antd/lib/input/TextArea";
 // const RichTextExample = () => {
 //   const [value, setValue] = useState<Descendant[]>(initialValue)
 //   const renderElement = useCallback(props => <Element {...props} />, [])
@@ -10,7 +26,7 @@ import { Col, Modal, Row, Button } from "antd";
 
 //   return (
 //     <Slate editor={editor} value={value} onChange={value => setValue(value)}>
-      
+
 //       <Editable
 //         renderElement={renderElement}
 //         renderLeaf={renderLeaf}
@@ -31,13 +47,16 @@ import { Col, Modal, Row, Button } from "antd";
 //   )
 // }
 
-
 interface IBoardListDialog {
   isVisible: boolean;
   onCancel?: (e: React.MouseEvent<HTMLElement>) => void;
   onOk?: (e: React.MouseEvent<HTMLElement>) => void;
 }
-const BoardListDialog = ({ isVisible, onCancel, onOk }: IBoardListDialog) => {
+const BoardListDialog = ({
+  isVisible,
+  onCancel,
+  onOk,
+}: IBoardListDialog) => {
   const editor = useRef<HTMLDivElement>(null);
   const [content, setContent] = useState("");
 
@@ -58,25 +77,67 @@ const BoardListDialog = ({ isVisible, onCancel, onOk }: IBoardListDialog) => {
         <Col span={16}>
           <div className="actions">
             <Button
-              type="default"
+              type="primary"
               icon={<FontAwesomeIcon icon={faPaperclip} />}
             >
               Attach
             </Button>
-            <Button type="default" icon={<FontAwesomeIcon icon={faBug} />}>
+            <Button
+              type="primary"
+              icon={<FontAwesomeIcon icon={faBug} />}
+            >
               Add a child issue
             </Button>
-            <Button type="default" icon={<FontAwesomeIcon icon={faLink} />}>
+            <Button
+              type="primary"
+              icon={<FontAwesomeIcon icon={faLink} />}
+            >
               Link Issue
             </Button>
           </div>
-
-          
+          <Row>
+            <Col span={24}>
+              <p>Description</p>
+              <TextArea placeholder={"Add a description"} />
+            </Col>
+          </Row>
+          <Divider />
+          <Row>
+            <Col span={2}>
+              <Avatar icon={<UserOutlined />} size={40} />
+            </Col>
+            <Col span={22}>
+              <ReactQuill
+                value={content}
+                onChange={(value: any) => {
+                  setContent(value);
+                }}
+              />
+            </Col>
+          </Row>
         </Col>
         <Col span={8}>
-          <p>asdasdas</p>
+          <Dropdown.Button
+            onClick={(e: any) => {}}
+            overlay={
+              <Menu onClick={(e: any) => {}}>
+                <Menu.Item key="1" icon={<UserOutlined />}>
+                  1st menu item
+                </Menu.Item>
+                <Menu.Item key="2" icon={<UserOutlined />}>
+                  2nd menu item
+                </Menu.Item>
+                <Menu.Item key="3" icon={<UserOutlined />}>
+                  3rd menu item
+                </Menu.Item>
+              </Menu>
+            }
+          >
+            To Do
+          </Dropdown.Button>
         </Col>
       </Row>
+      <div dangerouslySetInnerHTML={{ __html: content }}></div>
     </Modal>
   );
 };

@@ -70,7 +70,9 @@ const DragPage = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const [boardList, setBoardList] = useState(getBoardCards(5, 18));
-  const [cloneBoardList, setCloneBoardList] = useState<IBoardList[]>([]);
+  const [cloneBoardList, setCloneBoardList] = useState<IBoardList[]>(
+    []
+  );
   const [menuStyles, setMenuStyles] = useState<Object>({
     display: "none",
     position: "fixed",
@@ -78,7 +80,11 @@ const DragPage = () => {
     left: 0,
   });
   // a little function to help us with reordering the result
-  const reorder = (list: ICards[], startIndex: number, endIndex: number) => {
+  const reorder = (
+    list: ICards[],
+    startIndex: number,
+    endIndex: number
+  ) => {
     const result: Array<any> = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
@@ -179,7 +185,9 @@ const DragPage = () => {
     };
   };
 
-  const handleIssueSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleIssueSearch = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const queryValue = e.target.value;
 
     const result = boardList.map((board) => {
@@ -212,34 +220,32 @@ const DragPage = () => {
     e.preventDefault();
 
     setPrevTarget(e.target);
-    
+
     setMenuStyles({
       display: "block",
       position: "fixed",
       top: e.screenY - 90,
       left: e.screenX,
-     
     });
   };
 
-  
   useEffect(() => {
     window.addEventListener("click", (e) => {
-      if(e.target !== prevTarget){
+      if (e.target !== prevTarget) {
         setMenuStyles({
           display: "none",
           position: "fixed",
           top: 0,
-          left:0,
+          left: 0,
           background: "red",
         });
       }
-      console.log(e)
+      console.log(e);
     });
     setTimeout(() => {
       setIsLoaded(true);
     }, 1000);
-  },[]);
+  }, []);
 
   useEffect(() => {
     setCloneBoardList(boardList);
@@ -270,7 +276,9 @@ const DragPage = () => {
             />
             <Avatar.Group>
               <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-              <Avatar style={{ backgroundColor: "#f56a00" }}>K</Avatar>
+              <Avatar style={{ backgroundColor: "#f56a00" }}>
+                K
+              </Avatar>
               <Tooltip title="Ant User" placement="top">
                 <Avatar
                   style={{ backgroundColor: "#87d068" }}
@@ -332,7 +340,9 @@ const DragPage = () => {
                           <Dropdown.Button
                             overlay={
                               <Menu>
-                                <Menu.Item key="1">Set Column limit</Menu.Item>
+                                <Menu.Item key="1">
+                                  Set Column limit
+                                </Menu.Item>
                                 <Menu.Item key="2">Delete</Menu.Item>
                               </Menu>
                             }
@@ -341,89 +351,112 @@ const DragPage = () => {
                       </div>
 
                       <div>
-                        {board.boardCardList.map((cardList, k2: number) => {
-                          return (
-                            <Draggable
-                              key={cardList.id}
-                              draggableId={cardList.id}
-                              index={k2}
-                            >
-                              {(provided, snapshot) => (
-                                <div
-                                  key={k2}
-                                  className="board--list--card"
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  style={getStyle(
-                                    provided.draggableProps.style,
-                                    snapshot
-                                  )}
-                                
-                                >
-                                  <div className="header"   >
-                                    <p className="header-title" onClick={handleShowBoardListDialog}>
-                                      {cardList.content}
-                                     
-                                    </p>
-                                    <div className="action">
-                                      <Dropdown.Button
-                                        overlay={
-                                          <Menu
-                                            onClick={(e) => {
-                                              console.log(e, board, cardList);
-                                              if (e.key === "delete") {
-                                                setBoardList(
-                                                  boardList.map((b) => {
-                                                    if (board.id === b.id) {
-                                                      const boardCardList = board.boardCardList.filter(
-                                                        (card) => {
-                                                          return (
-                                                            card.id !==
-                                                            cardList.id
-                                                          );
-                                                        }
-                                                      );
-                                                      return {
-                                                        ...b,
-                                                        boardCardList,
-                                                      };
-                                                    }
-                                                    return b;
-                                                  })
-                                                );
-                                              }
-                                            }}
-                                          >
-                                            <Menu.Item key="limit">
-                                              Set Column limit
-                                            </Menu.Item>
-                                            <Menu.Item key="delete">
-                                              Delete
-                                            </Menu.Item>
-                                          </Menu>
+                        {board.boardCardList.map(
+                          (cardList, k2: number) => {
+                            return (
+                              <Draggable
+                                key={cardList.id}
+                                draggableId={cardList.id}
+                                index={k2}
+                              >
+                                {(provided, snapshot) => (
+                                  <div
+                                    key={k2}
+                                    className="board--list--card"
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    style={getStyle(
+                                      provided.draggableProps.style,
+                                      snapshot
+                                    )}
+                                  >
+                                    <div className="header">
+                                      <p
+                                        className="header-title"
+                                        onClick={
+                                          handleShowBoardListDialog
                                         }
-                                      ></Dropdown.Button>
+                                      >
+                                        {cardList.content}
+                                      </p>
+                                      <div className="action">
+                                        <Dropdown.Button
+                                          overlay={
+                                            <Menu
+                                              onClick={(e) => {
+                                                console.log(
+                                                  e,
+                                                  board,
+                                                  cardList
+                                                );
+                                                if (
+                                                  e.key === "delete"
+                                                ) {
+                                                  setBoardList(
+                                                    boardList.map(
+                                                      (b) => {
+                                                        if (
+                                                          board.id ===
+                                                          b.id
+                                                        ) {
+                                                          const boardCardList =
+                                                            board.boardCardList.filter(
+                                                              (
+                                                                card
+                                                              ) => {
+                                                                return (
+                                                                  card.id !==
+                                                                  cardList.id
+                                                                );
+                                                              }
+                                                            );
+                                                          return {
+                                                            ...b,
+                                                            boardCardList,
+                                                          };
+                                                        }
+                                                        return b;
+                                                      }
+                                                    )
+                                                  );
+                                                }
+                                              }}
+                                            >
+                                              <Menu.Item key="limit">
+                                                Set Column limit
+                                              </Menu.Item>
+                                              <Menu.Item key="delete">
+                                                Delete
+                                              </Menu.Item>
+                                            </Menu>
+                                          }
+                                        ></Dropdown.Button>
+                                      </div>
+                                    </div>
+                                    <div className="main">
+                                      <div className="main-label">
+                                        {[1, 2].map((n) => (
+                                          <Button
+                                            key={n}
+                                            type={
+                                              n % 2
+                                                ? "primary"
+                                                : "default"
+                                            }
+                                            size={"small"}
+                                          >
+                                            Fontend
+                                          </Button>
+                                        ))}
+                                      </div>
                                     </div>
                                   </div>
-                                  <div className="main">
-                                    <div className="main-label">
-                                      {[1,2].map((n) => (
-                                        <Button
-                                          key={n}
-                                          type={n % 2 ? "primary" : "default"}
-                                          size={"small"}
-                                        >
-                                          Fontend
-                                        </Button>
-                                      ))}
-                                    </div>
-                                  </div>
-                                </div>
-                              )}
-                            </Draggable>
-                          );
-                        })}
+                                )}
+                              </Draggable>
+                            );
+                          }
+                        )}
                       </div>
                     </div>
                   )}
@@ -437,16 +470,13 @@ const DragPage = () => {
             onCancel={handleCancelBoardListDialog}
           />
 
-          <div style={menuStyles}
-            className="menu--context"
-          >
+          <div style={menuStyles} className="menu--context">
             <ul className="list">
               <li className="list--item">Add label</li>
               <li className="list--item">Remove flags</li>
               <li className="list--item">Copy issue link</li>
               <li className="list--item">Delete</li>
             </ul>
-
           </div>
         </div>
       ) : (
