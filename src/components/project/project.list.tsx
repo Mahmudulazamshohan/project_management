@@ -41,7 +41,8 @@ const columns: ColumnsType<IColumn> = [
 
     // specify the condition of filtering result
     // here is that finding the name started with `value`
-    onFilter: (value: any, record: any) => record.name.indexOf(value) === 0,
+    onFilter: (value: any, record: any) =>
+      record.name.indexOf(value) === 0,
     sorter: (a: any, b: any) => {
       return a.name.length - b.name.length;
     },
@@ -50,7 +51,7 @@ const columns: ColumnsType<IColumn> = [
       const query = encodeGetQuery({
         projectKey: value,
       });
-      const uri = "/drag-page/" + value + query;
+      const uri = "/board/" + value + query;
       return <Link to={uri}>{value}</Link>;
     },
   },
@@ -64,7 +65,8 @@ const columns: ColumnsType<IColumn> = [
     title: "Type",
     dataIndex: "type",
 
-    onFilter: (value: any, record: any) => record?.type.indexOf(value) === 0,
+    onFilter: (value: any, record: any) =>
+      record?.type.indexOf(value) === 0,
     sorter: (a: any, b: any) => a.type.length - b.type.length,
   },
   {
@@ -75,7 +77,12 @@ const columns: ColumnsType<IColumn> = [
         <Row>
           <Col span={4}>
             <Link to={"/" + value}>
-              <Avatar style={{ color: "#f56a00", backgroundColor: "#fde3cf" }}>
+              <Avatar
+                style={{
+                  color: "#f56a00",
+                  backgroundColor: "#fde3cf",
+                }}
+              >
                 S
               </Avatar>
             </Link>
@@ -89,20 +96,32 @@ const columns: ColumnsType<IColumn> = [
   },
 ];
 
-const data: any = Array.from(Array(50)).map((value: number, key: number) => {
-  return {
-    key,
-    name: "Project" + key,
-    age: Math.floor(Math.random() * key),
-    type: key % 2 ? "Team-managed software" : "Company-managed software",
-    lead: "Shohan",
-  };
-});
+const data: any = Array.from(Array(50)).map(
+  (value: number, key: number) => {
+    return {
+      key,
+      name: "Project" + key,
+      age: Math.floor(Math.random() * key),
+      type:
+        key % 2
+          ? "Team-managed software"
+          : "Company-managed software",
+      lead: "Shohan",
+    };
+  }
+);
 
-function onChange(pagination: any, filters: any, sorter: any, extra: any) {
+function onChange(
+  pagination: any,
+  filters: any,
+  sorter: any,
+  extra: any
+) {
   console.log("params", pagination, filters, sorter, extra);
 }
 
 export const ProjectList: React.FC<IProjectProps> = () => {
-  return <Table columns={columns} dataSource={data} onChange={onChange} />;
+  return (
+    <Table columns={columns} dataSource={data} onChange={onChange} />
+  );
 };

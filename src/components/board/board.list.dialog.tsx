@@ -57,12 +57,52 @@ const BoardListDialog = ({
   onCancel,
   onOk,
 }: IBoardListDialog) => {
+  interface IEditorModules {
+    toolbar: Array<any>;
+    clipboard: object;
+  }
+
   const editor = useRef<HTMLDivElement>(null);
+
   const [content, setContent] = useState("");
 
-  const config = {
-    readonly: false, // all options from https://xdsoft.net/jodit/doc/
-  };
+  const [editorModules] = useState<IEditorModules>({
+    toolbar: [
+      [{ header: "1" }, { header: "2" }, { font: [] }],
+      [{ size: [] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["link", "image", "video"],
+      ["clean"],
+    ],
+    clipboard: {
+      // toggle to add extra line breaks when pasting HTML:
+      matchVisual: false,
+    },
+  });
+
+  const editorFormats = [
+    "header",
+    "font",
+    "size",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "indent",
+    "link",
+    "image",
+    "video",
+  ];
+
   return (
     <Modal
       title="Drag and drop issue"
@@ -112,6 +152,10 @@ const BoardListDialog = ({
                 onChange={(value: any) => {
                   setContent(value);
                 }}
+                theme="snow"
+                modules={editorModules}
+                formats={editorFormats}
+                placeholder={"Write a comment"}
               />
             </Col>
           </Row>
@@ -141,4 +185,5 @@ const BoardListDialog = ({
     </Modal>
   );
 };
+
 export default BoardListDialog;

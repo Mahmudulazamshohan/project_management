@@ -9,10 +9,8 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 import "./App.css";
-import HomePage from "./pages/HomePage";
+
 import AppLayouts from "./layouts/AppLayouts";
-import DragPage from "./pages/DragPage";
-import { GuardedRoute } from "./components/auth/GaurdedRoute";
 import { IRoutes } from "./interfaces/IRoutes";
 import routes from "./routes";
 
@@ -32,9 +30,7 @@ const Topics: React.FC = () => {
       <p>Topics</p>
       <ul>
         <li>
-          <Link to={`${match.url}/components`}>
-            Components
-          </Link>
+          <Link to={`${match.url}/components`}>Components</Link>
         </li>
         <li>
           <Link to={`${match.url}/props-v-state`}>

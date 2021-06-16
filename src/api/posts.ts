@@ -4,7 +4,6 @@ import axios from "axios";
 import { getPostsAction } from "../redux/actions/postActions";
 import { PostActionTypes } from "../redux/types/postTypes";
 
-
 export const getPosts = async () => {
   return async function (dispatch: Dispatch<PostActionTypes>) {
     return await axios
@@ -15,4 +14,5 @@ export const getPosts = async () => {
       .catch(console.error);
   };
 };
+
 export const removePost = (id: number) => {};
