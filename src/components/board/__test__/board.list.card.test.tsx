@@ -5,7 +5,7 @@ import { shallow } from "enzyme";
 
 describe("BoardListCard props testcase", () => {
   beforeEach(() => {
-    console.log('--->')
+    console.log("--->");
   });
   it("all props checked", () => {
     var wrapper = shallow(<BoardListCard>shohan</BoardListCard>);
@@ -15,5 +15,4 @@ describe("BoardListCard props testcase", () => {
     var counterElement = wrapper.find(".counter");
     expect(counterElement.text()).toEqual("2");
   });
-
 });
