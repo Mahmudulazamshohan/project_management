@@ -11,9 +11,7 @@
 
 #### some screenshots of project management
 
-![alt text](./public/image1.png "Screenshot 1")
-![alt text](./public/image2.png "Screenshot 2")
-![alt text](./public/image3.png "Screenshot 3")
+![alt text](./public/image1.png "Screenshot 1")![alt text](./public/image2.png "Screenshot 2")![alt text](./public/image3.png "Screenshot 3")
 
 ## Installation
 
