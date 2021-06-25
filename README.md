@@ -11,9 +11,9 @@
 
 #### some screenshots of project management
 
-![alt text](https://raw.githubusercontent.com/Mahmudulazamshohan/project_management/master/public/image1.PNG "Screenshot 1")
-![alt text](https://raw.githubusercontent.com/Mahmudulazamshohan/project_management/master/public/image2.PNG "Screenshot 2")
-![alt text](https://raw.githubusercontent.com/Mahmudulazamshohan/project_management/master/public/image3.PNG "Screenshot 3")
+![alt text](https://raw.githubusercontent.com/Mahmudulazamshohan/project_management/master/public/image1.png "Screenshot 1")
+![alt text](https://raw.githubusercontent.com/Mahmudulazamshohan/project_management/master/public/image2.png "Screenshot 2")
+![alt text](https://raw.githubusercontent.com/Mahmudulazamshohan/project_management/master/public/image3.png "Screenshot 3")
 
 ## Installation
 
