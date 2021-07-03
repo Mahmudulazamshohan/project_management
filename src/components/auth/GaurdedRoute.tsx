@@ -12,6 +12,7 @@ export const GuardedRoute: React.FC<IGuardRoute> = ({
   isAllowed,
   restrictedPath,
   authenticationPath,
+
   ...rest
 }) => {
   let redirectPath = "";
@@ -25,6 +26,6 @@ export const GuardedRoute: React.FC<IGuardRoute> = ({
   return !redirectPath && isAuthenticated ? (
     <Route {...rest} render={undefined} />
   ) : (
-    <Redirect to={{ pathname: redirectPath }} />
+    <Redirect to={{ pathname: redirectPath }} exact={true} />
   );
 };

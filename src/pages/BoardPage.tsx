@@ -65,7 +65,7 @@ const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
   ...draggableStyle,
 });
 
-const DragPage = () => {
+const DragPage: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
@@ -199,7 +199,10 @@ const DragPage = () => {
             .includes(queryValue.toLowerCase());
         });
       }
-      return { ...board, boardCardList: temp };
+      return {
+        ...board,
+        boardCardList: temp,
+      };
     });
 
     setCloneBoardList(result);
@@ -240,7 +243,7 @@ const DragPage = () => {
           background: "red",
         });
       }
-      console.log(e);
+      //console.log(e);
     });
     setTimeout(() => {
       setIsLoaded(true);

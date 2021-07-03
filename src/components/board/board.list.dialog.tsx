@@ -18,6 +18,7 @@ import ReactQuill from "react-quill";
 import Avatar from "antd/lib/avatar/avatar";
 import { UserOutlined } from "@ant-design/icons";
 import TextArea from "antd/lib/input/TextArea";
+import RichTextEditor from "../rich.texteditor";
 // const RichTextExample = () => {
 //   const [value, setValue] = useState<Descendant[]>(initialValue)
 //   const renderElement = useCallback(props => <Element {...props} />, [])
@@ -52,57 +53,17 @@ interface IBoardListDialog {
   onCancel?: (e: React.MouseEvent<HTMLElement>) => void;
   onOk?: (e: React.MouseEvent<HTMLElement>) => void;
 }
+
+interface IEditorModules {
+  toolbar: Array<any>;
+  clipboard: object;
+}
+
 const BoardListDialog = ({
   isVisible,
   onCancel,
   onOk,
 }: IBoardListDialog) => {
-  interface IEditorModules {
-    toolbar: Array<any>;
-    clipboard: object;
-  }
-
-  const editor = useRef<HTMLDivElement>(null);
-
-  const [content, setContent] = useState("");
-
-  const [editorModules] = useState<IEditorModules>({
-    toolbar: [
-      [{ header: "1" }, { header: "2" }, { font: [] }],
-      [{ size: [] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        { indent: "-1" },
-        { indent: "+1" },
-      ],
-      ["link", "image", "video"],
-      ["clean"],
-    ],
-    clipboard: {
-      // toggle to add extra line breaks when pasting HTML:
-      matchVisual: false,
-    },
-  });
-
-  const editorFormats = [
-    "header",
-    "font",
-    "size",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-    "video",
-  ];
-
   return (
     <Modal
       title="Drag and drop issue"
@@ -119,6 +80,9 @@ const BoardListDialog = ({
             <Button
               type="primary"
               icon={<FontAwesomeIcon icon={faPaperclip} />}
+              onClick={(e) => {
+                console.log(e.currentTarget);
+              }}
             >
               Attach
             </Button>
@@ -147,16 +111,7 @@ const BoardListDialog = ({
               <Avatar icon={<UserOutlined />} size={40} />
             </Col>
             <Col span={22}>
-              <ReactQuill
-                value={content}
-                onChange={(value: any) => {
-                  setContent(value);
-                }}
-                theme="snow"
-                modules={editorModules}
-                formats={editorFormats}
-                placeholder={"Write a comment"}
-              />
+              <RichTextEditor htmlString={""} />
             </Col>
           </Row>
         </Col>
@@ -181,7 +136,7 @@ const BoardListDialog = ({
           </Dropdown.Button>
         </Col>
       </Row>
-      <div dangerouslySetInnerHTML={{ __html: content }}></div>
+      {/* <div dangerouslySetInnerHTML={{ __html: content }}></div> */}
     </Modal>
   );
 };

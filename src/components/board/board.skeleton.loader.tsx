@@ -19,7 +19,6 @@ const BoardSkeletonLoader: React.FC<IBoardSkeletonLoader> = ({
   ...props
 }: IBoardSkeletonLoader) => {
   const list = [];
-
   let height;
 
   for (let i = 1; i <= row; i++) {
@@ -35,9 +34,14 @@ const BoardSkeletonLoader: React.FC<IBoardSkeletonLoader> = ({
       const height3 = 20;
 
       const space =
-        padding + height1 + (padding / 2 + height2) + height3 + padding * 4;
+        padding +
+        height1 +
+        (padding / 2 + height2) +
+        height3 +
+        padding * 4;
 
-      const y1 = padding + heading.height + padding * 2 + space * (i - 1);
+      const y1 =
+        padding + heading.height + padding * 2 + space * (i - 1);
 
       const y2 = y1 + padding + height1;
 
@@ -53,7 +57,14 @@ const BoardSkeletonLoader: React.FC<IBoardSkeletonLoader> = ({
             width={itemWidth}
             height={height1}
           />
-          <rect x={x} y={y2} rx={0} ry={0} width={itemWidth} height={height2} />
+          <rect
+            x={x}
+            y={y2}
+            rx={0}
+            ry={0}
+            width={itemWidth}
+            height={height2}
+          />
           <rect
             x={x}
             y={y3}
