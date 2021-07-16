@@ -19,7 +19,7 @@ export const LayoutBaseRender: React.FC<IRoutes> = ({
   redirect,
 }) => {
   let data = <></>;
-
+  console.log(rootLayout);
   if (rootLayout === "AppLayouts") {
     data = (
       <AppLayouts
@@ -29,10 +29,7 @@ export const LayoutBaseRender: React.FC<IRoutes> = ({
           ) : (
             <GuardedRoute
               path={path}
-              isAllowed={authenticate}
-              isAuthenticated={authenticate}
-              restrictedPath={redirect || authRedirect}
-              authenticationPath={path}
+              redirectTo={redirect}
               component={component}
               exact={true}
             />
@@ -49,10 +46,7 @@ export const LayoutBaseRender: React.FC<IRoutes> = ({
           ) : (
             <GuardedRoute
               path={path}
-              isAllowed={true}
-              isAuthenticated={authenticate}
-              restrictedPath={redirect || authRedirect}
-              authenticationPath={path}
+              redirectTo={redirect}
               component={component}
               exact={true}
             />

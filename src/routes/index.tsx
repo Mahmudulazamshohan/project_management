@@ -12,9 +12,10 @@ const routes: Array<IRoutes> = [
     title: "Home",
     rootLayout: "AppLayouts",
     exact: true,
-    authenticate: true,
+    authenticate: false,
     middleware: "user",
     component: HomePage,
+    redirect: "/login",
   },
   {
     path: "/admin",

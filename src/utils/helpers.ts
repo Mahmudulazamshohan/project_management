@@ -1,7 +1,7 @@
 /**
- * 
- * @param queryObj 
- * @returns 
+ *
+ * @param queryObj
+ * @returns
  */
 export const encodeGetQuery = (queryObj: object) =>
   "?" +
