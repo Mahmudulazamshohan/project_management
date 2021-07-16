@@ -24,7 +24,7 @@ const routes: Array<IRoutes> = [
     authenticate: true,
     middleware: "user",
     component: () => {
-      return <p>asdas</p>;
+      return <p>damn</p>;
     },
   },
   {
