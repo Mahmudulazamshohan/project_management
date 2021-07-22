@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronCircleDown } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory, withRouter } from "react-router-dom";
 import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
+import Logo from "../teams.svg";
 const { SubMenu } = Menu;
-
 const AppLayouts: React.FC = ({ children }) => {
   const [current, setCurrent] = useState<string>("jira");
   const history = useHistory();
@@ -16,8 +16,12 @@ const AppLayouts: React.FC = ({ children }) => {
 
   useEffect(() => {
     history.listen((location) => {
-      document.title = location.pathname.replaceAll("/", " ").toUpperCase();
-      setBreadCrumbPath(location.pathname.replaceAll("/", " ").toUpperCase());
+      document.title = location.pathname
+        .replaceAll("/", " ")
+        .toUpperCase();
+      setBreadCrumbPath(
+        location.pathname.replaceAll("/", " ").toUpperCase()
+      );
     });
   }, []);
 
@@ -31,7 +35,9 @@ const AppLayouts: React.FC = ({ children }) => {
         mode="horizontal"
       >
         <Menu.Item key="jira">
-          <Link to="/">Jira Software</Link>
+          <Link to="/">
+            <img src={Logo} style={{ width: "40px" }} />
+          </Link>
         </Menu.Item>
 
         <SubMenu key="SubMenu" title={"Your works"}>
@@ -70,7 +76,11 @@ const AppLayouts: React.FC = ({ children }) => {
               defaultOpenKeys={["sub1"]}
               mode="inline"
             >
-              <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Roadmap">
+              <SubMenu
+                key="sub2"
+                icon={<AppstoreOutlined />}
+                title="Roadmap"
+              >
                 <Menu.Item key="5">Option 5</Menu.Item>
                 <Menu.Item key="6">Option 6</Menu.Item>
                 <SubMenu key="sub3" title="Submenu">

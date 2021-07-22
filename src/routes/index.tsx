@@ -3,6 +3,7 @@ import HomePage from "../pages/HomePage";
 import BoardPage from "../pages/BoardPage";
 import NotfoundPage from "../pages/NotfoundPage";
 import AppLayouts from "../layouts/AppLayouts";
+import LoginPage from "../pages/auth/LoginPage";
 
 export const authRedirect: string = "/login";
 
@@ -33,10 +34,8 @@ const routes: Array<IRoutes> = [
     title: "Login",
     exact: true,
     authenticate: true,
-    middleware: "user",
-    component: () => {
-      return <p>login</p>;
-    },
+    middleware: "none",
+    component: LoginPage,
   },
   {
     path: "/board/:id",
