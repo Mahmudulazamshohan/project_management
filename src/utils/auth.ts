@@ -3,6 +3,10 @@ import UniversalCookie from "universal-cookie";
 const cookies = new UniversalCookie();
 
 export class Auth {
+  /**
+   *
+   *
+   **/
   static login(token: string): void {
     return cookies.set("token", "");
   }

@@ -3,8 +3,13 @@ import { Breadcrumb, Col, Menu, Row } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronCircleDown } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory, withRouter } from "react-router-dom";
-import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
-import Logo from "../teams.svg";
+import {
+  AppstoreOutlined,
+  SettingOutlined,
+  BugOutlined,
+  LineChartOutlined,
+} from "@ant-design/icons";
+import Logo from "../trans_logo.svg";
 const { SubMenu } = Menu;
 const AppLayouts: React.FC = ({ children }) => {
   const [current, setCurrent] = useState<string>("jira");
@@ -16,6 +21,7 @@ const AppLayouts: React.FC = ({ children }) => {
 
   useEffect(() => {
     history.listen((location) => {
+      console.log("location", location);
       document.title = location.pathname
         .replaceAll("/", " ")
         .toUpperCase();
@@ -23,7 +29,7 @@ const AppLayouts: React.FC = ({ children }) => {
         location.pathname.replaceAll("/", " ").toUpperCase()
       );
     });
-  }, []);
+  }, [history.location]);
 
   return (
     <div className="app--root">
@@ -98,6 +104,15 @@ const AppLayouts: React.FC = ({ children }) => {
                 <Menu.Item key="11">Option 11</Menu.Item>
                 <Menu.Item key="12">Option 12</Menu.Item>
               </SubMenu>
+              <Menu.Item icon={<LineChartOutlined />} key="13">
+                Reports
+              </Menu.Item>
+              <Menu.Item icon={<BugOutlined />} key="14">
+                Issues
+              </Menu.Item>
+              <Menu.Item icon={<SettingOutlined />} key="15">
+                Project Settings
+              </Menu.Item>
             </Menu>
           </div>
         </Col>

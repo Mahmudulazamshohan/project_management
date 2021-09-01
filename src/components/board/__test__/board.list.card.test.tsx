@@ -7,12 +7,13 @@ describe("BoardListCard props testcase", () => {
   beforeEach(() => {
     console.log("--->");
   });
-  it("all props checked", () => {
+  it("BoardListCard props checked", () => {
     var wrapper = shallow(<BoardListCard>shohan</BoardListCard>);
+
     var divElement = wrapper.find(".button");
     divElement.simulate("click");
 
     var counterElement = wrapper.find(".counter");
-    expect(counterElement.text()).toEqual("2");
+    expect(counterElement.text()).toEqual("1");
   });
 });
